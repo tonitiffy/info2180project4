@@ -9,14 +9,21 @@
     </head>
     <body>
         <div class="formLayout">
-        <form action="p3.php" method="post" onsubmit="return validateFormData();">
+        <form action="p3.php" method="post" onsubmit="return validateFormData();" onreset="resetForm();">
             <fieldset>
+                <label for="firstname">First Name</label>
+                <input id="firstname" type="text" name="firstname"/><br /><br />
+                <label for="lastname">Last Name</label>
+                <input id="lastname" type="text" name="lastname"/><br /><br />
                 <label for="username">Username</label>
                 <input id="username" type="text" name="username"/><br /><br />
                 <label for="password">Password</label>
                 <input id="password" type="text" name="password"/><br /><br />
+                <label for="retypePassword">Re-Type Password</label>
+                <input id="retypePassword" type="text" name="retypePassword"/><br /><br />
                 <div class="buttonLayout">
-                    <input type="submit" value="Sign In"/>
+                    <input type="submit" value="Submit"/>
+                    <input type="reset" value="Reset"/>
                 </div>
             </fieldset>
         </form>

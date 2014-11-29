@@ -11,12 +11,14 @@
         <div class="formLayout">
         <form action="p3.php" method="post" onsubmit="return validateFormData();">
             <fieldset>
-                <label for="username">Username</label>
-                <input id="username" type="text" name="username"/><br /><br />
-                <label for="password">Password</label>
-                <input id="password" type="text" name="password"/><br /><br />
+                <label for="subject">Subject</label>
+                <input id="subject" type="text" name="subject"/><br /><br />
+                <label for="recipients">Recipients</label>
+                <input id="recipients" type="text" name="recipients"/><br /><br />
+                <textarea rows="4" cols="50"></textarea>
                 <div class="buttonLayout">
-                    <input type="submit" value="Sign In"/>
+                    <input type="submit" value="Send"/>
+                    <input type="button" value="Cancel"/>
                 </div>
             </fieldset>
         </form>
