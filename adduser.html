@@ -4,12 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Course creation form</title>
-        <link href="p2.css" type="text/css" rel="stylesheet"/>
-        <script src="p2.js" type="text/javascript"></script>
+        <script src="newuserValidation.js" type="text/javascript"></script>
     </head>
     <body>
         <div class="formLayout">
-        <form action="p3.php" method="post" onsubmit="return validateFormData();" onreset="resetForm();">
+        <form onsubmit="return validateData();" onreset="resetForm();">
             <fieldset>
                 <label for="firstname">First Name</label>
                 <input id="firstname" type="text" name="firstname"/><br /><br />
