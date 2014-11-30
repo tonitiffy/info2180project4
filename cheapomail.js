@@ -2,15 +2,17 @@ function verifyUser(){
     //alert("button clicked");
     var username = $("username").value;
     var password = $("password").value;
-    //alert(username);
-    //alert(password);
+    alert(username);
+    alert(password);
     
     new Ajax.Request("login.php",
         {
             method: "GET",
             parameters: 'username='+username+'&password='+password,
             onSuccess: function testor(ajax){
-                $("body").innerHTML = ajax.responseText;
+                document.open();
+                document.write(ajax.responseText);
+                document.close();
             }
         }
     );
@@ -21,7 +23,9 @@ function composeMsg(){
         {
             method: "GET",
             onSuccess: function testor(ajax){
-                $("body").innerHTML = ajax.responseText;
+                document.open();
+                document.write(ajax.responseText);
+                document.close();
             }
         }
     );
@@ -36,20 +40,37 @@ function sendMsg(){
             method: "GET",
             parameters: 'subject='+subject+'&recipients='+recipients+'&body='+body,
             onSuccess: function testor(ajax){
-                $("body").innerHTML = ajax.responseText;
+                document.open();
+                document.write(ajax.responseText);
+                document.close();
             }
         }
     );
     return false;
 }
-function returnToSignIn(){
-    new Ajax.Request("signIn.php",
+function logout(){
+    new Ajax.Request("logout.php",
         {
             method: "GET",
             onSuccess: function testor(ajax){
-                $("body").innerHTML = ajax.responseText;
+                document.open();
+                document.write(ajax.responseText);
+                document.close();
             }
         }
-    );
+    )
+    return false;
+}
+function viewMsg(){
+    new Ajax.Request("message.php",
+        {
+            method: "GET",
+            onSuccess: function testor(ajax){
+                document.open();
+                document.write(ajax.responseText);
+                document.close();
+            }
+        }
+    )
     return false;
 }
