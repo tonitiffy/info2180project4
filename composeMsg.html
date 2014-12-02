@@ -3,25 +3,35 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>CheapoMaill - Compose Message</title>
+        <title>Compose</title>
         <link href="stylesheet.css" type="text/css" rel="stylesheet"/>
         <script src="cheapomail.js" type="text/javascript"></script>
     </head>
     <body>
-        <div class="formLayout">
-        <form onsubmit="return sendMsg();">
+        <div id="composelayout">
+        <div class='menubar'>
+            <input id="home" type="button" value="Home" onclick="returnToHome()"/>
+            <input id="compose" type="button" value="Compose" onclick="composeMsg"/>
+            <input id="logout" type="button" value="Logout" onclick="logout()"/>
+        </div>
+        
+        <div class='formLayout'>
+        <form >
             <fieldset>
-                <label for="subject">Subject</label>
+                <label class='label2' for="subject">Subject</label>
                 <input id="subject" type="text" name="subject"/><br /><br />
-                <label for="recipients">Recipients</label>
+                <label class='label2' for="recipients">Recipients</label>
                 <input id="recipients" type="text" name="recipients"/><br /><br />
                 <textarea id="body" rows="4" cols="50"></textarea>
+                <br />
+                <br/>
                 <div class="buttonLayout">
-                    <input type="submit" value="Send"/>
+                    <input id="composeSubmit" type="button" value="Send" onclick="sendMsg()"/>
                     <input type="button" value="Cancel" onclick="returnToHome()"/>
                 </div>
             </fieldset>
         </form>
+        </div>
         </div>
     </body>
 </html>

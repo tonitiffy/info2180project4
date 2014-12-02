@@ -34,6 +34,6 @@
     /*$stmt = $db->prepare("INSERT INTO Message_read(message_id,reader_id,date) VALUES(:message_id,:reader_id, :date,);");
     $stmt->execute(array(':message_id'=>$,':reader_id'=> $, ':date'=>$));
     */
-    header("location: home.php");
+    header("location: home.html");
 
 ?>

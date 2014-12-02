@@ -1,9 +1,10 @@
 function verifyUser(){
     //alert("button clicked");
+
     var username = $("username").value;
     var password = $("password").value;
-    alert(username);
-    alert(password);
+    //alert(username);
+    //alert(password);
     
     new Ajax.Request("login.php",
         {
@@ -16,7 +17,21 @@ function verifyUser(){
             }
         }
     );
-    return false;
+    //return false;
+}
+function loadData(){
+    //alert("loadData was called");
+    new Ajax.Request("home.php",
+        {
+            method: "GET",
+            onSuccess: function testor(ajax){
+                //document.open();
+                document.body.innerHTML=ajax.responseText;
+                //document.body.innerHTML="hello";
+                //document.close();
+            }
+        }
+    );
 }
 function composeMsg(){
     new Ajax.Request("composeMsg.php",
@@ -29,7 +44,6 @@ function composeMsg(){
             }
         }
     );
-    return false;
 }
 function sendMsg(){
     var subject = $("subject").value;
@@ -46,7 +60,6 @@ function sendMsg(){
             }
         }
     );
-    return false;
 }
 function logout(){
     new Ajax.Request("logout.php",
@@ -58,11 +71,10 @@ function logout(){
                 document.close();
             }
         }
-    )
-    return false;
+    );
 }
-function viewMsg(){
-    new Ajax.Request("message.php",
+function returnToHome(){
+    new Ajax.Request("returnHome.php",
         {
             method: "GET",
             onSuccess: function testor(ajax){
@@ -71,6 +83,5 @@ function viewMsg(){
                 document.close();
             }
         }
-    )
-    return false;
+    );
 }

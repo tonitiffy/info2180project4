@@ -6,7 +6,8 @@
 	catch(PDOException $e){
 		exit("Unable to access database. Goodbye!");
 	} 
-
+    
+   
     $username = $_REQUEST["username"];
     $password = $_REQUEST["password"];
     //echo "hello";
@@ -29,11 +30,12 @@
         $_SESSION["firstname"] = $results[0][1];
         $_SESSION["lastname"] = $results[0][2];
         $_SESSION["id"] = $results[0][0];
-        header("Location: home.php");
+        header("Location: home.html");
         //echo (file_get_contents("home.html"));
     }
     else{
-        echo("Password Incorrect! Please Re-enter!");
-        echo(file_get_contents("index.html"));
+        //echo("Password Incorrect! Please Re-enter!");
+        header("Location: index.html");
     }
+    
 ?>

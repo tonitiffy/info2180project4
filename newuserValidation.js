@@ -1,68 +1,56 @@
 function validateData() {
     //
     //alert("hello");
-    var firstname = document.getElementById("firstname");
-    var lastname = document.getElementById("lastname");
-    var password = document.getElementById("password");
-    var retypePassword = document.getElementById("retypePassword");
-    var username = document.getElementById("username");
-    /*alert(password.value);
-    var testing = /[A-Z]{2}/.exec("APP");    
-    alert(testing);
-    alert(/[0-9{1,}A-Z{1,}a-z{1,}]{8,}/.exec("password"));
-    */
-    
-    
-    var pattern = new RegExp(/[0-9+A-Z+a-z+]/);
-    alert(pattern.test('password'));
-    
-    /*alert(preg_match("/[0-9{1,}A-Z{1,}a-z{1,}]{8,}/",password.value));*/
-    //
-    /*if (preg_match([0-9{1,}A-Z{1,}a-z{1,}]{8,},password.value)){
-        password.style.backgroundColor = "red";
-        return false;
+    var firstname = $("firstname").value;
+    var lastname = $("lastname").value;
+    var password = $("password").value;
+    var retypePassword = $("retypePassword").value;
+    var username = $("username").value;
+   
+//alert(firstname+lastname+password+retypePassword+username);
+    var re = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/; 
+    //alert(re.exec(password));
+    if (firstname===""){
+        $("firstname").style.backgroundColor="red";
+    }else{
+        $("firstname").removeAttribute("style");
+    }
+    if(lastname===""){
+        $("lastname").style.backgroundColor="red";
     }
     else{
-        password.removeAttribute("style");
-    }*/
-    /*if (courseTitleEle.value === ""){
-        courseTitleEle.style.backgroundColor = "red";
-        return false;
+        $("lastname").removeAttribute("style");
     }
-    else{
-        
-        courseTitleEle.removeAttribute("style");
+    if(username===""){
+        $("username").style.backgroundColor="red";
+    }else{
+        $("username").removeAttribute("style");
     }
-    if (courseDisciplineEle.value === "" || courseDisciplineEle.value.length !== 4 || isNaN(courseDisciplineEle.value,10)!==true){
-        courseDisciplineEle.style.backgroundColor = "red";
-        return false;
+    if(password.length < 8|| re.exec(password)===null){
+        $("password").style.backgroundColor="red";
+    }else{
+        $("password").removeAttribute("style");
     }
-    else{
-        courseDisciplineEle.removeAttribute("style");
+    if(retypePassword==="" || retypePassword!==password){
+        $("retypePassword").style.backgroundColor="red";
+    }else{
+        $("retypePassword").removeAttribute("style");
     }
-    if(courseLevelEle.value === "" ){
-        courseLevelEle.style.backgroundColor = "red";
-        return false;
+    if(firstname!==""&&lastname!==""&&username!==""&&password.length>7&&re.exec(password)!==null&&retypePassword!==""&&retypePassword===password){
+        //alert("everything is ok");
+        new Ajax.Request("addUser.php",
+            {
+                method: "GET",
+                parameters: 'firstname='+firstname+'&lastname='+lastname+'&username='+username+'&password='+password,
+                onSuccess: function testor(ajax){
+                    //alert("hello from success");
+                    document.open();
+                    document.write(ajax.responseText);
+                    document.close;
+                }
+            }
+        );
     }
-    else {
-        courseLevelEle.removeAttribute("style");
-        
-    }
-    if (courseSemesterEle.value === ""){
-        courseSemesterEle.style.backgroundColor = "red";
-        return false;
-    }
-    else{
-        courseSemesterEle.removeAttribute("style");
-    }
-    if (isNaN(parseInt(creditEle.value,10), 10)||creditEle < 0 || creditEle > 8){
-        creditEle.style.backgroundColor = "red";
-        return false;
-    }
-    else{
-        creditEle.removeAttribute("style");
-    }*/
-    return true;
 }
 
 function resetForm(){

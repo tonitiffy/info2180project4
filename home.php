@@ -10,49 +10,83 @@
     //echo("hello");
 
     $query = $db->prepare("SELECT * FROM Message JOIN Message_read ON message.id = Message_read.message_id WHERE message_read.reader_id = :reader_id ORDER BY date DESC;");
+    //echo($_SESSION["id"]);
     $query->execute(array(':reader_id'=>$_SESSION["id"]));
     $results = $query->fetchAll();
-
-
+    $query2 = $db->prepare("SELECT firstname,lastname,id, username FROM User ORDER BY id");
+    $query2-> execute();
+    $results2 = $query2-> fetchAll();
 ?>
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Home</title>
-        <script src="//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
-        <script src="cheapomail.js" type="text/javascript"></script>
-    </head>
-    <body>
-        <div>
-            <button type="button" onclick="return composeMsg();">Compose</button>
-            <button type="button" onclick="return logout();">Logout</button>
+    
+        <div class='menubar'>
+            <input id="home" type="button" value="Home" onclick="returnToHome()"/>
+            <input id="compose" type="button" value="Compose" onclick="composeMsg()"/>
+            <input id="logout" type="button" value="Logout" onclick="logout()"/>
         </div>
-        <br />
-        <br />
-        <div>
-            <table>
-                <tr>
-                    <th>Sender</th>
-                    <th>Subject</th>
-                    <th>Date</th>
-                </tr>
-<?php
-        foreach($results as $row){
-            $query2 = $db->prepare("SELECT * FROM user WHERE id = :user_id;");
-    $query2->execute(array(':user_id'=>$row["user_id"]));
-    $sender = $query2->fetchAll();
-            $senderFirstname = $sender[0][1];
-            $senderLastname = $sender[0][2];
+        <div class="homelayout">
+        <div class="userslist">
+            CheapoMail Users
+            <ul>
+                <?php
+                foreach($results2 as $row){
+                ?>
+                <li><?php echo($row["id"]); ?> &nbsp;<?php echo($row["firstname"]." "); echo($row["lastname"]);?> &nbsp; <?php echo($row["username"]);?></li>
+                <?php
+                }
+                ?>
+            </ul>
             
-        ?>
-        <tr><td><?php echo($senderFirstname." ".$senderLastname);?></td><td><?php echo($row["subject"]);?></td><td><?php echo($row["date"]);?></td></tr>
-        <tr><td colspan="3"><?php echo($row["body"]);?></td></tr>
-        <?php
+        </div>
+        <div class="messagedisplay">
+<?php   
+        $i=0;
+        if (count($results) < 10){
+            
+            while ($i < count($results)){
+                $query2 = $db->prepare("SELECT * FROM user WHERE id = :user_id;");
+        $query2->execute(array(':user_id'=>$results[$i][3]));
+        $sender = $query2->fetchAll();
+                $senderFirstname = $sender[0][1];
+                $senderLastname = $sender[0][2];
+
+            ?>
+            <div>
+                From: <?php echo($senderFirstname." ".$senderLastname);?> &nbsp;
+                Date: <?php echo($results[$i][8]);?>
+                <br />
+                Subject: &nbsp; <?php echo($results[$i][2]);?>
+                <br/>
+                <?php echo($results[$i][1]);?>
+            </div>
+            <br/>
+                <?php
+                $i++;
+            }
+        }
+        else{
+            while ($i < 10){
+                $query2 = $db->prepare("SELECT * FROM user WHERE id = :user_id;");
+        $query2->execute(array(':user_id'=>$results[$i][3]));
+        $sender = $query2->fetchAll();
+                $senderFirstname = $sender[0][1];
+                $senderLastname = $sender[0][2];
+
+            ?>
+            <div>
+                From: &nbsp;&nbsp; <?php echo($senderFirstname." ".$senderLastname);?> &nbsp;
+                Date: <?php echo($results[$i][8]);?>
+                <br />
+                Subject: &nbsp; <?php echo($results[$i][2]);?>
+                <br/>
+                <?php echo($results[$i][1]);?>
+            </div>
+            <br>
+            <?php
+                $i++;
+            }
         }
 ?>
-            </table>
         </div>
-    </body>
+        </div>
+    
 </html>
