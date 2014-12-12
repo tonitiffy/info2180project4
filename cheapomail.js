@@ -1,11 +1,6 @@
 function verifyUser(){
-    //alert("button clicked");
-
     var username = $("username").value;
     var password = $("password").value;
-    //alert(username);
-    //alert(password);
-    
     new Ajax.Request("login.php",
         {
             method: "GET",
@@ -14,21 +9,17 @@ function verifyUser(){
                 document.open();
                 document.write(ajax.responseText);
                 document.close();
+
             }
         }
     );
-    //return false;
 }
 function loadData(){
-    //alert("loadData was called");
     new Ajax.Request("home.php",
         {
             method: "GET",
             onSuccess: function testor(ajax){
-                //document.open();
                 document.body.innerHTML=ajax.responseText;
-                //document.body.innerHTML="hello";
-                //document.close();
             }
         }
     );
@@ -73,7 +64,7 @@ function logout(){
         }
     );
 }
-function returnToHome(){
+function returnHome(){
     new Ajax.Request("returnHome.php",
         {
             method: "GET",
@@ -81,6 +72,16 @@ function returnToHome(){
                 document.open();
                 document.write(ajax.responseText);
                 document.close();
+            }
+        }
+    );
+}
+function loadUsers(){
+    new Ajax.Request("userlist.php",
+        {
+            method: "GET",
+            onSuccess: function testor(ajax){
+                $("userlist").innerHTML = ajax.responseText;
             }
         }
     );

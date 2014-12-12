@@ -1,15 +1,11 @@
 function validateData() {
-    //
-    //alert("hello");
     var firstname = $("firstname").value;
     var lastname = $("lastname").value;
     var password = $("password").value;
     var retypePassword = $("retypePassword").value;
     var username = $("username").value;
    
-//alert(firstname+lastname+password+retypePassword+username);
     var re = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/; 
-    //alert(re.exec(password));
     if (firstname===""){
         $("firstname").style.backgroundColor="red";
     }else{
@@ -37,7 +33,6 @@ function validateData() {
         $("retypePassword").removeAttribute("style");
     }
     if(firstname!==""&&lastname!==""&&username!==""&&password.length>7&&re.exec(password)!==null&&retypePassword!==""&&retypePassword===password){
-        //alert("everything is ok");
         new Ajax.Request("addUser.php",
             {
                 method: "GET",
