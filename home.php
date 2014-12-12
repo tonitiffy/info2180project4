@@ -11,9 +11,10 @@
     $query = $db->prepare("SELECT * FROM Message JOIN Message_read ON message.id = Message_read.message_id WHERE message_read.reader_id = :reader_id ORDER BY date DESC;");
     $query->execute(array(':reader_id'=>$_SESSION["id"]));
     $results = $query->fetchAll();
-    $query2 = $db->prepare("SELECT firstname,lastname,id, username FROM User ORDER BY id");
+    $_SESSION["messageArray"] = $results;
+    /*$query2 = $db->prepare("SELECT firstname,lastname,id, username FROM User ORDER BY id");
     $query2-> execute();
-    $results2 = $query2-> fetchAll();
+    $results2 = $query2-> fetchAll();*/
 ?>
     
         <div class='menubar'>
@@ -37,7 +38,7 @@
                 $senderFirstname = $sender[0][1];
                 $senderLastname = $sender[0][2];
 ?>
-            <div class="message">
+            <div id="<?php echo $i;?>" class="message" onclick="openMsg()">
                 From: <?php echo($senderFirstname." ".$senderLastname);?> &nbsp;
                 Date: <?php echo($results[$i][8]);?>
                 <br/>
@@ -58,7 +59,7 @@
                 $senderFirstname = $sender[0][1];
                 $senderLastname = $sender[0][2];
 ?>
-            <div class="message">
+            <div id="<?php echo $i;?>" class="message" onclick="openMsg()">
                 From: &nbsp;&nbsp; <?php echo($senderFirstname." ".$senderLastname);?> &nbsp;
                 Date: <?php echo($results[$i][8]);?>
                 <br/>

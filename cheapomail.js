@@ -23,6 +23,7 @@ function loadData(){
             }
         }
     );
+    
 }
 function composeMsg(){
     new Ajax.Request("composeMsg.php",
@@ -85,4 +86,21 @@ function loadUsers(){
             }
         }
     );
+}
+function openMsg(){
+    alert("div clicked");
+    alert(this);
+    var div_id=this.getAttribute('id');
+    alert(div_id);
+    /*new Ajax.Request("openMsg.php",
+        {
+            method: "GET",
+            parameters: 'id='+div_id,
+            onSuccess: function testor(ajax){
+                document.open();
+                document.write(ajax.responseText);
+                document.close();
+            }
+        }
+    );*/
 }
