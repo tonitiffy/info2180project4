@@ -9,7 +9,7 @@
     $lastname = $_REQUEST["lastname"];
     $username = $_REQUEST["username"];
     $password = $_REQUEST["password"];
-    //echo("hello");
+    
     $re = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/";
     if (preg_match($re, $password)){
         $stmt = $db->prepare("INSERT INTO User(firstname, lastname, password, username) VALUES (:firstname, :lastname , :password, :username)");

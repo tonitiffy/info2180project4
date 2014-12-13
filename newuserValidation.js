@@ -37,8 +37,7 @@ function validateData() {
             {
                 method: "GET",
                 parameters: 'firstname='+firstname+'&lastname='+lastname+'&username='+username+'&password='+password,
-                onSuccess: function testor(ajax){
-                    //alert("hello from success");
+                onSuccess: function handler(ajax){
                     document.open();
                     document.write(ajax.responseText);
                     document.close;
